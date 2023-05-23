@@ -1,8 +1,6 @@
 export class Direction {
-    private direction: string;
 
-    constructor(direction: string) {
-        this.direction = direction;
+    constructor(private direction: string) {
     }
 
     isFacingNorth() {
