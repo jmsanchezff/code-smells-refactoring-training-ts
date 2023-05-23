@@ -2,11 +2,11 @@ export class Coordinates {
     constructor(private x: number, private y: number) {
     }
 
-    getX() {
-        return this.x;
+    moveAlongY(displacement: number) {
+        return new Coordinates(this.x, this.y + displacement);
     }
 
-    getY() {
-        return this.y;
+    moveAlongX(displacement: number) {
+        return new Coordinates(this.x + displacement, this.y);
     }
 }
