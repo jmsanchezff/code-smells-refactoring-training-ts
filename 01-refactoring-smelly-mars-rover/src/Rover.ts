@@ -6,6 +6,11 @@ class Direction {
     constructor(direction: string) {
         this.direction = direction;
     }
+
+    isFacingNorth() {
+        return this.direction === "N";
+    }
+
 }
 
 export class Rover {
@@ -33,7 +38,7 @@ export class Rover {
 
             if (command === "l") {
                 // Rotate Rover
-                if (this.direction === "N") {
+                if (this.directionType.isFacingNorth()) {
                     this.setDirection("W");
                 } else if (this.direction === "S") {
                     this.setDirection("E");
@@ -44,7 +49,7 @@ export class Rover {
                 }
             } else if (command === "r") {
                 // Rotate Rover
-                if (this.direction === "N") {
+                if (this.directionType.isFacingNorth()) {
                     this.setDirection("E");
                 } else if (this.direction === "S") {
                     this.setDirection("W");
@@ -63,7 +68,7 @@ export class Rover {
                 }
                 let displacement = displacement1;
 
-                if (this.direction === "N") {
+                if (this.directionType.isFacingNorth()) {
                     this.y += displacement;
                 } else if (this.direction === "S") {
                     this.y -= displacement;
@@ -75,5 +80,4 @@ export class Rover {
             }
         }
     }
-
 }
