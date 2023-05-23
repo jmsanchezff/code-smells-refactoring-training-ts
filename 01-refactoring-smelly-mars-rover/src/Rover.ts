@@ -1,25 +1,7 @@
 //@ts-nocheck
 
-class Direction {
-    private direction: string;
-
-    constructor(direction: string) {
-        this.direction = direction;
-    }
-
-    isFacingNorth() {
-        return this.direction === "N";
-    }
-
-    isFacingSouth() {
-        return this.direction === "S";
-    }
-
-    isFacingWest() {
-        return this.direction === "W";
-    }
-
-}
+import {Direction} from "./Direction";
+import {Coordinates} from "./Coordinates";
 
 export class Rover {
     private y: number;
@@ -27,9 +9,14 @@ export class Rover {
     private direction: Direction;
 
     constructor(x: number, y: number, direction: string) {
+        this.setCoordinates(x, y);
+        this.setDirection(direction);
+    }
+
+    private setCoordinates(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.setDirection(direction);
+        this.coordinatesType = new Coordinates(x, y)
     }
 
     private setDirection(direction: string) {
@@ -74,13 +61,13 @@ export class Rover {
                 let displacement = displacement1;
 
                 if (this.direction.isFacingNorth()) {
-                    this.y += displacement;
+                    this.setCoordinates(this.coordinatesType.getX(), this.coordinatesType.getY() + displacement);
                 } else if (this.direction.isFacingSouth()) {
-                    this.y -= displacement;
+                    this.setCoordinates(this.coordinatesType.getX(), this.coordinatesType.getY() - displacement);
                 } else if (this.direction.isFacingWest()) {
-                    this.x -= displacement;
+                    this.setCoordinates(this.coordinatesType.getX() - displacement, this.coordinatesType.getY());
                 } else {
-                    this.x += displacement;
+                    this.setCoordinates(this.coordinatesType.getX() + displacement, this.coordinatesType.getY());
                 }
             }
         }
