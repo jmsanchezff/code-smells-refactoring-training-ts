@@ -7,8 +7,13 @@ export class Rover {
     constructor(x: number, y: number, direction: string) {
         this.x = x;
         this.y = y;
+        this.setDirection(direction);
+    }
+
+    private setDirection(direction: string) {
         this.direction = direction;
     }
+
 
     public receive(commandsSequence: string) {
         for (let i = 0; i < commandsSequence.length; ++i) {
@@ -17,24 +22,24 @@ export class Rover {
             if (command === "l") {
                 // Rotate Rover
                 if (this.direction === "N") {
-                    this.direction = "W";
+                    this.setDirection("W");
                 } else if (this.direction === "S") {
-                    this.direction = "E";
+                    this.setDirection("E");
                 } else if (this.direction === "W") {
-                    this.direction = "S";
+                    this.setDirection("S");
                 } else {
-                    this.direction = "N";
+                    this.setDirection("N");
                 }
             } else if (command === "r") {
                 // Rotate Rover
                 if (this.direction === "N") {
-                    this.direction = "E";
+                    this.setDirection("E");
                 } else if (this.direction === "S") {
-                    this.direction = "W";
+                    this.setDirection("W");
                 } else if (this.direction === "W") {
-                    this.direction = "N";
+                    this.setDirection("N");
                 } else {
-                    this.direction = "S";
+                    this.setDirection("S");
                 }
             } else {
 
