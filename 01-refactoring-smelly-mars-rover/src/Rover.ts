@@ -4,8 +4,6 @@ import {Direction} from "./Direction";
 import {Coordinates} from "./Coordinates";
 
 export class Rover {
-    private y: number;
-    private x: number;
     private direction: Direction;
 
     constructor(x: number, y: number, direction: string) {
@@ -14,8 +12,6 @@ export class Rover {
     }
 
     private setCoordinates(x: number, y: number) {
-        this.x = x;
-        this.y = y;
         this.coordinatesType = new Coordinates(x, y)
     }
 
