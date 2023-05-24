@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import {Direction} from "./Direction";
 import {Coordinates} from "./Coordinates";
 

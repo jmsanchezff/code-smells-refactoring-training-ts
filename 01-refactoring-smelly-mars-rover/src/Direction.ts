@@ -2,36 +2,11 @@ import {Coordinates} from "./Coordinates";
 
 export abstract class Direction {
 
-    constructor(private direction: string) {
-    }
-
-    isFacingNorth() {
-        return this.direction === "N";
-    }
-
-    isFacingSouth() {
-        return this.direction === "S";
-    }
-
-    isFacingWest() {
-        return this.direction === "W";
-    }
-
     abstract rotateLeft(): Direction;
 
     abstract rotateRight(): Direction;
 
-    move(displacement: number, coordinates: Coordinates): Coordinates {
-        if (this.isFacingNorth()) {
-            return coordinates.moveAlongY(displacement);
-        } else if (this.isFacingSouth()) {
-            return coordinates.moveAlongY(-displacement);
-        } else if (this.isFacingWest()) {
-            return coordinates.moveAlongX(-displacement);
-        } else {
-            return coordinates.moveAlongX(displacement);
-        }
-    }
+    abstract move(displacement: number, coordinates: Coordinates): Coordinates;
 
     static create(direction: string): Direction {
         if (direction === "N") {
@@ -47,10 +22,6 @@ export abstract class Direction {
 
 
 class North extends Direction {
-    constructor() {
-        super("N");
-    }
-
     rotateLeft(): Direction {
         return Direction.create("W")
     }
@@ -58,13 +29,14 @@ class North extends Direction {
     rotateRight(): Direction {
         return  Direction.create("E")
     }
+
+    move(displacement: number, coordinates: Coordinates): Coordinates {
+        return coordinates.moveAlongY(displacement);
+    }
+
 }
 
 class South extends Direction {
-    constructor() {
-        super("S");
-    }
-
     rotateLeft(): Direction {
         return Direction.create("E");
     }
@@ -72,12 +44,13 @@ class South extends Direction {
     rotateRight(): Direction {
         return Direction.create("W");
     }
+
+    move(displacement: number, coordinates: Coordinates): Coordinates {
+        return coordinates.moveAlongY(-displacement);
+    }
 }
 
 class West extends Direction {
-    constructor() {
-        super("W");
-    }
 
     rotateLeft(): Direction {
         return Direction.create("S");
@@ -85,13 +58,14 @@ class West extends Direction {
 
     rotateRight(): Direction {
         return Direction.create("N");
+    }
+
+    move(displacement: number, coordinates: Coordinates): Coordinates {
+        return coordinates.moveAlongX(-displacement);
     }
 }
 
 class East extends Direction {
-    constructor() {
-        super("E");
-    }
 
     rotateLeft(): Direction {
         return Direction.create("N");
@@ -99,5 +73,9 @@ class East extends Direction {
 
     rotateRight(): Direction {
         return Direction.create("S");
+    }
+
+    move(displacement: number, coordinates: Coordinates): Coordinates {
+        return coordinates.moveAlongX(displacement);
     }
 }
