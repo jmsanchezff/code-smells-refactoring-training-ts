@@ -9,40 +9,25 @@ export class Rover {
 
     constructor(x: number, y: number, direction: string) {
         this.coordinates = new Coordinates(x, y)
-        this.setDirection(direction);
+        this.direction = Direction.create(direction)
     }
-
-
-    private setDirection(direction: string) {
-        this.direction = new Direction(direction)
-    }
-
 
     public receive(commandsSequence: string) {
         for (let i = 0; i < commandsSequence.length; ++i) {
             const command = commandsSequence.substring(i, i + 1);
 
             if (command === "l") {
-                // Rotate Rover
-                if (this.direction.isFacingNorth()) {
-                    this.setDirection("W");
-                } else if (this.direction.isFacingSouth()) {
-                    this.setDirection("E");
-                } else if (this.direction.isFacingWest()) {
-                    this.setDirection("S");
-                } else {
-                    this.setDirection("N");
-                }
+                this.direction = this.direction.rotateLeft()
             } else if (command === "r") {
                 // Rotate Rover
                 if (this.direction.isFacingNorth()) {
-                    this.setDirection("E");
+                    this.direction = Direction.create("E")
                 } else if (this.direction.isFacingSouth()) {
-                    this.setDirection("W");
+                    this.direction = Direction.create("W")
                 } else if (this.direction.isFacingWest()) {
-                    this.setDirection("N");
+                    this.direction = Direction.create("N")
                 } else {
-                    this.setDirection("S");
+                    this.direction = Direction.create("S")
                 }
             } else {
 
