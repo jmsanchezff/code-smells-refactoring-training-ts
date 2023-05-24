@@ -29,16 +29,7 @@ export class Rover {
                     displacement1 = 1;
                 }
                 let displacement = displacement1;
-
-                if (this.direction.isFacingNorth()) {
-                    this.coordinates = this.coordinates.moveAlongY(displacement);
-                } else if (this.direction.isFacingSouth()) {
-                    this.coordinates = this.coordinates.moveAlongY(-displacement);
-                } else if (this.direction.isFacingWest()) {
-                    this.coordinates = this.coordinates.moveAlongX(-displacement);
-                } else {
-                    this.coordinates = this.coordinates.moveAlongX(displacement);
-                }
+                this.coordinates = this.direction.move(displacement, this.coordinates);
             }
         }
     }
