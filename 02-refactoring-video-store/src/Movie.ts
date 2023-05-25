@@ -4,11 +4,11 @@ export class Movie {
     public static NEW_RELEASE: number = 1;
 
     private readonly title: string;
-    private readonly priceCode: number;
+    private readonly movieType: number;
 
-    constructor(title: string, priceCode: number) {
+    constructor(title: string, movieType: number) {
         this.title = title;
-        this.priceCode = priceCode;
+        this.movieType = movieType;
     }
 
     public getTitle(): string {
@@ -17,7 +17,7 @@ export class Movie {
 
     getCost(daysRented: number) {
         let rental_cost = 0;
-        switch (this.priceCode) {
+        switch (this.movieType) {
             case Movie.REGULAR:
                 rental_cost = 2;
                 if (daysRented > 2) {
@@ -38,7 +38,7 @@ export class Movie {
     }
 
     getFrequentRenterPoints(daysRented: number) {
-        if (this.priceCode == Movie.NEW_RELEASE && daysRented > 1) {
+        if (this.movieType == Movie.NEW_RELEASE && daysRented > 1) {
             return 2
         }
         return 1
